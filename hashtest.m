@@ -31,9 +31,14 @@ for round=1:real_TOTAL_ROUND
         if(cache_check_f(cache,data)~=1)
             FALSE_POS=FALSE_POS+1;
             [cache_addentry_f_local_polling]=cache_addentry_f_local_polling_f(cache_addentry_f_local_polling,CACHE_SIZE);
-            replace_data=cache(cache_addentry_f_local_polling,(2:end));
-            [BF]=delete_f(BF,replace_data,BF_SIZE); 
-            [BF]=insert_f(BF,data,BF_SIZE);
+            
+            if(all(cache(:,1))==1)          %all: check if all element are nonzero
+               replace_data=cache(cache_addentry_f_local_polling,(2:end));
+               [BF]=delete_f(BF,replace_data,BF_SIZE); 
+               [BF]=insert_f(BF,data,BF_SIZE);
+            else
+                [BF]=insert_f(BF,data,BF_SIZE);
+            end
             [cache,cache_addentry_f_local_polling]=cache_addentry_f(cache,data,cache_addentry_f_local_polling); 
             CACHE_CHANGE=CACHE_CHANGE+1;
         end
