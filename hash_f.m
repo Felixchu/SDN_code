@@ -1,0 +1,24 @@
+function [BF_match_loc]=hash_f(data,BF_SIZE);
+    src=data(1);
+    dst=data(2);
+    port_s=data(3);
+    port_d=data(4);
+    prot=data(5);
+    bitvector_src=de2bi(src,32);
+    bitvector_dst=de2bi(dst,32);
+    bitvector_port_s=de2bi(port_s,16);
+    bitvector_port_d=de2bi(port_d,16);
+    bitvector_prot=de2bi(prot,8);
+    bitvector_xor_temp=xor(bitvector_src,bitvector_dst);
+    bitvector_1=xor(xor(bitvector_src,bitvector_dst),[bitvector_port_s bitvector_port_d]);
+    bitvector_2=xor(or(xor(bitvector_src,bitvector_dst),[bitvector_port_s bitvector_port_d]),bitrevorder([bitvector_dst]));
+    bitvector_3=xor(xor(and(bitrevorder(bitvector_dst),bitvector_src),bitvector_dst),[bitvector_port_d bitvector_port_s]);
+    bitvector_4=xor(xor(xor(bitrevorder(bitvector_src),bitvector_src),bitrevorder(bitvector_dst)),[bitvector_port_d bitvector_port_s]);
+    bitvector_5=xor(xor(and(bitrevorder(bitvector_src),bitvector_src),bitrevorder(bitvector_dst)),[xor(bitvector_port_s,bitvector_port_d),bitrevorder(bitvector_port_s)]);
+    num_1=mod(bi2de(bitvector_1),BF_SIZE)+1;
+    num_2=mod(bi2de(bitvector_2),BF_SIZE)+1;
+    num_3=mod(bi2de(bitvector_3),BF_SIZE)+1;
+    num_4=mod(bi2de(bitvector_4),BF_SIZE)+1;
+    num_5=mod(bi2de(bitvector_5),BF_SIZE)+1;
+    BF_match_loc=[num_1 num_5 num_2 num_3];
+end
