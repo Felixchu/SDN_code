@@ -55,17 +55,17 @@ rule_prio=[size(rule_src,1):-1:1]';
 max_prio=0;
 max_golden=0;
 
-for i=1:size(packet_src,1)
-    for k=1:size(rule_src,1)
-       if (packet_src(i)<=rule_src(k,2) && packet_src(i)>=rule_src(k,1)) && (packet_dst(i)<=rule_dst(k,2) && packet_dst(i)>=rule_dst(k,1)) && (packet_src_p(i)<=rule_src_p(k,2) && packet_src_p(i)>=rule_src_p(k,1)) ...
-           && (packet_dst_p(i)<=rule_dst_p(k,2) && packet_dst_p(i)>=rule_dst_p(k,1)) && (packet_prot(i)==rule_prot(k,1) ||rule_prot(k,2)==0)
-           if(rule_prio(k)>max_prio)
-            max_prio=rule_prio(k);
-            max_golden=k;
-           end
-           break;
-       end
-    end
-    max_prio=0;
-    packet_golden(i)=max_golden;
-end
+% for i=1:size(packet_src,1)
+%     for k=1:size(rule_src,1)
+%        if (packet_src(i)<=rule_src(k,2) && packet_src(i)>=rule_src(k,1)) && (packet_dst(i)<=rule_dst(k,2) && packet_dst(i)>=rule_dst(k,1)) && (packet_src_p(i)<=rule_src_p(k,2) && packet_src_p(i)>=rule_src_p(k,1)) ...
+%            && (packet_dst_p(i)<=rule_dst_p(k,2) && packet_dst_p(i)>=rule_dst_p(k,1)) && (packet_prot(i)==rule_prot(k,1) ||rule_prot(k,2)==0)
+%            if(rule_prio(k)>max_prio)
+%             max_prio=rule_prio(k);
+%             max_golden=k;
+%            end
+%            break;
+%        end
+%     end
+%     max_prio=0;
+%     packet_golden(i)=max_golden;
+% end

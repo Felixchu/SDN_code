@@ -2,7 +2,7 @@
 %BF=3000;
 %false postive rate=5.6%
 %rule: acl1_10000_2_05_1   trace:acl1_10000_2_05_1_trace
-load hashtest_wildcard_acl1_10000_2_05_1_data_after_traslation.mat;
+%load hashtest_wildcard_acl1_10000_2_05_1_data_after_traslation.mat;
 CACHE_SIZE=1000;
 BF_SIZE=7001;
 cache=zeros(CACHE_SIZE,13);
